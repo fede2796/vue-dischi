@@ -8,6 +8,11 @@ body{
   font-family: 'Quicksand', sans-serif;
   color: $text-main-color;
 }
+img{
+  display: block;
+  width: 100%;
+}
+
 
 // RESET
 *{

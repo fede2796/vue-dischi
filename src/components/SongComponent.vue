@@ -1,28 +1,33 @@
 <template>
   <section>
     <div class="container">
-      <div class="row row-cols-5">
-        <div class="col">
-          <div class="card-content gx-5">
-            <img :src="arraysong[0].author" alt="">
-            {{arraysong[0].author}}
-          </div>
+      <div v-if="load" class="row row-cols-5">
+        <div class="col gy-3" v-for="song,index in arraysong" :key="index">
+            <SingleSong :singleSong="song" />
         </div>
       </div>
+       <LoadingSong v-else />
     </div>
   </section>
 </template>
 
 <script>
+  import LoadingSong from "./LoadingSong.vue";
+  import SingleSong from "./SingleSong.vue"
   import axios from "axios";
   export default {
     name: "SongComponent",
+    components:{
+        LoadingSong,
+        SingleSong
+    },
     props:{
     },
     data(){
       return{
         apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
         arraysong: [],
+        load: false,
       }
     },
     created(){
@@ -38,6 +43,7 @@
           // has failed
           console.log(err);    
         })
+        this.load = true;
       }
     }
   }
@@ -49,8 +55,5 @@
     width: 80%;
     margin: 0px auto;
     padding: 60px 0;
-    .card-content{
-      background-color: $bg-color-secondary;
-    }
   }
 </style>

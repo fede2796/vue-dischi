@@ -25,7 +25,7 @@ export default {
 @import "./style/common";
 @import "@/style/variables.scss";
 main{
-    height: calc(100vh - 60px);
+    height: 1000px;
     width: 100%;
     background-color: $main-bg-color;
   }
