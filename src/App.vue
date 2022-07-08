@@ -1,28 +1,52 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <PageHeader />
   </div>
+  <main>
+    {{arraysong}}
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PageHeader from './components/PageHeader.vue';
+import axios from "axios";
+import { response } from 'express';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PageHeader, 
+
+},
+  data() {
+    return{
+      apiUrl:"https://flynn.boolean.careers/exercises/api/array/music",
+      arraysong: [],
+    }
+},
+  mounted(){
+    this.ApiSongList();
+  },
+  methods:{
+    ApiSongList(){
+      axios.get(this.apiUrl).then(response =>{
+        console.log(response);
+        this.arraysong = response.data.response;
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import "./style/common";
+@import "@/style/variables.scss";
+main{
+    height: calc(100vh - 60px);
+    width: 100%;
+    background-color: $main-bg-color;
+  }
 </style>
