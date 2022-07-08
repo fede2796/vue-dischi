@@ -1,43 +1,23 @@
 <template>
   <div id="app">
     <PageHeader />
-  </div>
-  <main>
-    {{arraysong}}
+      <main>
+   <SongComponent />
   </main>
+  </div>
+ 
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue';
-import axios from "axios";
-import { response } from 'express';
+import SongComponent from './components/SongComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    PageHeader, 
-
+    PageHeader,
+    SongComponent
 },
-  data() {
-    return{
-      apiUrl:"https://flynn.boolean.careers/exercises/api/array/music",
-      arraysong: [],
-    }
-},
-  mounted(){
-    this.ApiSongList();
-  },
-  methods:{
-    ApiSongList(){
-      axios.get(this.apiUrl).then(response =>{
-        console.log(response);
-        this.arraysong = response.data.response;
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-    }
-  }
 }
 </script>
 
